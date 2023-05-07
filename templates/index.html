@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image/Video Viewer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" integrity="sha384-MJZSaw/uZGJfytG+e3qHd4o4P+fTh8+dBoXbb1gMQ2xOZGrufbY2QgrLaaI+lxzB" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+          {% if is_video %}
+            <video class="w-100" controls>
+              <source src="{{ url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          {% else %}
+            <img class="w-100" src="{{ url }}" alt="Image">
+          {% endif %}
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+          <button class="btn btn-primary" onclick="location.href='/next?idx={{ idx }}'">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-km2Q5/ZfiJMOo8MOWF/kAM3ZfeX1t0KjJF5P5g5rhJVJbiyddH+F4FA8Wz+NQeKk" crossorigin="anonymous"></script>
+  </body>
+</html>

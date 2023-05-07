@@ -1,14 +1,10 @@
-
-
 from flask import Flask, render_template, redirect, request
 import requests
-from PIL import Image
 
 
 app = Flask(__name__)
 
-#https://cdn.discordapp.com/attachments/758738659833806888/964067160307662858/final_62566610b2f99b007d766077_438123.mp4
-with open('/home/icos/Coden/py_projekte/Dis tok/meme - Kopie.txt', 'r') as f:
+with open('meme.txt', 'r') as f:
     image_urls = [line.strip() for line in f.readlines()]
 
 

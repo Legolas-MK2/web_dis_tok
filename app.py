@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-with open('meme.txt', 'r') as f:
+with open('meme.txt', 'r', encoding="utf-8") as f:
     image_urls = [line.strip() for line in f.readlines()]
 
 

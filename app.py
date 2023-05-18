@@ -80,6 +80,11 @@ def previous():
     return redirect('/?idx=' + str(idx))
 
 
+@app.route('/test')
+def test():
+    # Redirect to the index route with the updated index
+    return render_template('file.html', url="https://cdn.discordapp.com/attachments/969507244980981820/1105598438437044224/7B25E73F-57CD-4ABA-A632-667AE42A849C.png", is_video=False, idx=0)
+
 if __name__ == '__main__':
 
     app.run(debug=True)

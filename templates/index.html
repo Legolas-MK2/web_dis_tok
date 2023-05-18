@@ -17,21 +17,24 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-8">
           {% if is_video %}
-            <video class="w-100" controls>
+            <video controls>
               <source src="{{ url }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           {% else %}
-            <img class="w-100" src="{{ url }}" alt="Image">
+            <img src="{{ url }}" alt="Image">
           {% endif %}
         </div>
       </div>
       <br>
-      <div class="d-flex justify-content-center">
-        <div style="margin-left: -10%" class="rounded-circle" role="group" aria-label="Basic mixed styles example">
-          <button type="button" class="btn btn-success rounded-circle" onclick="location.href='/previous?idx={{ idx }}'">Previous</button>
-          <button type="button" class="btn btn-warning rounded-circle">🖤❤️</button>
-          <button type="button" class="btn btn-success rounded-circle" onclick="location.href='/next?idx={{ idx }}'">Next</button>
+      <div class="d-flex justify-content-center" style="height:100px;width:1000px">
+        <div style="margin-left: 10%" class="" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-success" style="height:80px;width:80px" onclick="location.href='/previous?idx={{ idx }}'">Previous</button>
+          <div style="height:80px;width:80px" class="btn-group-vertical" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-warning">Like</button>
+            <button type="button" class="btn btn-warning" onclick="">Copy</button>
+          </div>
+          <button type="button" class="btn btn-success" style="height:80px;width:80px" onclick="location.href='/next?idx={{ idx }}'">Next</button>
         </div>
       </div>
     </div>

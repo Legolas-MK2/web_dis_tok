@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request
 import requests
+import threading
 
 
 app = Flask(__name__)
@@ -36,6 +37,19 @@ def index():
     return redirect('/next?idx=' + str(idx))
 
 
+def preload_images_and_videos(current_idx):
+    global image_urls
+    next_idx = (current_idx + 1) % len(image_urls)
+    prev_idx = (current_idx - 1) % len(image_urls)
+
+    for idx in [next_idx, prev_idx]:
+        try:
+            response = requests.head(image_urls[idx])
+            if response.status_code == 200:
+                print(f"Preloaded {image_urls[idx]}")
+        except requests.ConnectionError:
+            pass
+
 # Next route
 @app.route('/next')
 def next():
@@ -54,9 +68,11 @@ def next():
         except requests.ConnectionError:
             pass
 
+    # Starte den Hintergrund-Thread zum Vorabladen der nächsten Bilder und Videos
+    threading.Thread(target=preload_images_and_videos, args=(idx,), daemon=True).start()
+
     # Redirect to the index route with the updated index
     return redirect('/?idx=' + str(idx))
-
 
 #previous
 @app.route('/previous')
@@ -76,6 +92,9 @@ def previous():
         except requests.ConnectionError:
             pass
 
+    # Starte den Hintergrund-Thread zum Vorabladen der nächsten Bilder und Videos
+    threading.Thread(target=preload_images_and_videos, args=(idx,), daemon=True).start()
+
     # Redirect to the index route with the updated index
     return redirect('/?idx=' + str(idx))
 
@@ -83,10 +102,8 @@ def previous():
 @app.route('/test')
 def test():
     # Redirect to the index route with the updated index
-    return render_template('file.html', url="https://cdn.discordapp.com/attachments/969507244980981820/1105598438437044224/7B25E73F-57CD-4ABA-A632-667AE42A849C.png", is_video=False, idx=0)
+    return render_template('test.html')
+
 
 if __name__ == '__main__':
-
     app.run(debug=True)
-
-

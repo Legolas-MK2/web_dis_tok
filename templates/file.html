@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image/Video Viewer</title>
+  </head>
+  <body style="">
+    <div style="">
+      {% if is_video %}
+        <video class="w-100" controls>
+          <source src="{{ url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      {% else %}
+        <img class="w-100" src="{{ url }}" alt="Image">
+      {% endif %}
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-primary" onclick="location.href='/next?idx={{ idx }}'">Next</button>
+    </div>
+  </body>
+</html>
